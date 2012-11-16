@@ -1,0 +1,181 @@
+<style>
+/* Resset do CSS */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* FIM do Resset */
+
+
+#barrinha {
+	margin:0 auto;
+}
+#barrinha, ul {
+	height:43px;
+	background-color:#222222;
+}
+ul {
+	margin:0 auto;
+	width:950px;
+	list-style:none;
+	color:818181;
+	position:relative;
+}
+ul li {
+	float:left;
+	border-right:1px solid #090909;
+	border-left:1px solid #303030;
+	cursor:pointer;
+	height:42px;
+}
+ul li:first-child {
+	border-left:0;
+}
+ul li a {
+	display:block;
+	text-indent:-9999px;
+	overflow:hidden;
+	height:26px;
+}
+h1, h2 {
+	display:block;
+	text-indent:-9999px;
+	overflow:hidden;
+	background:url(sprite-top-bar.jpg) no-repeat;
+}
+h1 {
+	height: 20px;
+	margin: 10px 25px;
+	width: 157px;
+}
+h2 {
+	margin: 8px 20px;
+	width: 56px;
+}
+#mtm {
+	height: 26px;
+	background-position: 0 -20px;
+}
+#mte {
+	height: 26px;
+	background-position: -56px -20px;
+}
+/* Links Abertos */
+.open {
+	background-color:#000;
+}
+.open #mtm {
+	width:148px;
+	background-position:0 -46px;
+}
+.open #mte {
+	width:179px;
+	background-position:0 -72px;
+}
+.end{ border-right:0;}
+.contato {
+	position:absolute;
+	margin-left:800px;
+	border-right:0px!important;
+	padding:12px;
+	height:19px;
+}
+.contato a {
+	background:url(sprite-top-bar.jpg) no-repeat -1px -98px;
+	height: 14px;
+	width: 142px;
+}
+</style>
+<div id="barrinha">
+  <ul>
+    <li>
+      <h1>Magic the Heads</h1>
+    </li>
+    <li class='animavel'>
+      <h2 id="mtm"><a href="http://magictm.com.br" title="Magic the Market" target="_blank">Magic the Market</a></h2>
+    </li>
+    <li class='open'>
+      <h2 id="mte"><a href="http://magicte.com.br" title="Magic the Experience" target="_blank">Magic the Experience</a></h2>
+    </li>
+    <li class="end"></li>
+    <li class="contato"> <a href="mailto:mtg.experience@gmail.com" title="Fale Conosco">Fale Conosco</a> </li>
+  </ul>
+</div>
+<script type="text/javascript" >
+
+var ExpandUI = {
+	execute : function(command, el) {
+		this.el = el;
+		this.expand_obj = this;
+		this.speed = 200;
+		this.animation_timeout = [];
+		
+		if(command == 'over') {
+			this.over();
+		} else {
+			this.out();
+		}
+	},
+	
+	over : function(){
+		var self = this;
+	    this.getButton().fadeOut(self.speed, function() {
+	        $(self.el).addClass('open')
+	        self.getButton().fadeIn(self.speed);
+	    });
+	},
+	
+	out : function(){
+		var self = this;
+		clearTimeout(self.animation_timeout);
+	    this.getButton().fadeOut(self.speed, function() {
+	        $(self.el).removeClass('open')
+	       self.getButton().fadeIn(self.speed);
+	    })
+	},
+	
+	getButton : function() {
+		return $(this.el).find('h2');
+	}
+}
+
+var Events = {
+	init : function() {
+		$('ul .animavel').bind('mouseover', (function() {ExpandUI.execute('over',this)}));
+		$('ul .animavel').bind('mouseout', (function() {ExpandUI.execute('out', this)}));
+	}
+}
+
+var Bootstrap = {
+	init : function() {
+		Events.init();	
+	}
+}
+
+$(document).ready(Bootstrap.init());
+</script>
